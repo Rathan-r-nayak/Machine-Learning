@@ -833,3 +833,77 @@ Correlation measures the relationship between two variables, specifically betwee
 
 **Next Steps:**
 The speaker notes that while these steps are preliminary, the following videos will cover **Univariate Analysis** (analyzing columns individually), **Multivariate Analysis**, and automated analysis using **Pandas Profiling**.
+
+
+### EDA using Univariate Analysis 
+
+#### What is Univariate Analysis?
+Exploratory Data Analysis (EDA) is the process of understanding your data "inside out".
+*   **Definition:** "Univariate" combines "Uni" (one) and "Variate" (variable). It refers to the analysis of a single column independently.
+*   **Goal:** Unlike Bivariate (two columns) or Multivariate (more than two columns) analysis which looks for relationships, Univariate analysis focuses solely on understanding the nature and distribution of one specific feature at a time.
+
+#### Step 1: Identify Data Types
+Before analyzing, you must categorize the column type, as this dictates the approach:
+1.  **Categorical Data:** Represents groups or classes (e.g., Gender, Nationality, College Branch, Survived/Not Survived).
+2.  **Numerical Data:** Represents quantitative measurements (e.g., Height, Weight, Age, Price).
+
+The speaker demonstrates this using the **Titanic dataset**, categorizing columns like `Survived` and `Pclass` (Passenger Class) as categorical, and `Age` and `Fare` as numerical.
+
+
+#### Analyzing Categorical Data
+For categorical columns, the primary goal is to understand the frequency or percentage of each category.
+
+**1. Countplot**
+*   **Function:** Visualizes the frequency (count) of each category.
+*   **Insight:** Using the `seaborn` library (`sns.countplot`), the speaker reveals that out of 891 passengers, significantly more people died (0) than survived (1). Similarly, for `Pclass`, it showed that Class 3 had the highest number of passengers, while Class 2 had the lowest.
+
+**2. Pie Chart**
+*   **Function:** Visualizes the data as percentages rather than raw numbers.
+*   **Insight:** By using parameters like `autopct`, you can see the exact distribution breakdown.
+    *   **Example:** On the Titanic, 61.6% of people died, and 55% of all passengers were traveling in Class 3.
+
+
+#### Analyzing Numerical Data
+For numerical columns (like `Age`), knowing the frequency of every single unique number is often useless. Instead, the focus shifts to distribution, density, and outliers.
+
+**1. Histogram**
+*   **Function:** It groups continuous data into ranges called "bins".
+*   **Insight:** It shows the distribution of data. For the `Age` column, the histogram revealed that very young children and very old people were fewer in number, while the majority of passengers were in the middle age range (20s to 40s).
+*   **Customisation:** You can adjust the number of bins to make the graph more granular or broader.
+
+**2. Distplot (Distribution Plot) & KDE**
+*   **Function:** This creates a histogram overlaid with a curve called the **KDE (Kernel Density Estimation)**.
+*   **Concept (PDF):** The curve represents the **Probability Density Function (PDF)**. The Y-axis represents probability rather than count.
+*   **Insight:** It allows you to calculate the probability of a specific value occurring (e.g., "What is the probability of a passenger being 40 years old?"). It is also essential for identifying **Skewness** (see below).
+
+**3. Boxplot**
+*   **Function:** Provides a "5-number summary" of the data: Minimum, Q1 (25th percentile), Median (50%), Q3 (75th percentile), and Maximum.
+*   **Key Use Case:** It is the primary tool for detecting **Outliers** (noise).
+*   **Logic:** Any data point falling outside the calculated range (1.5 times the Interquartile Range or IQR) is considered an outlier.
+*   **Example:** The `Fare` column boxplot showed massive outliers (e.g., a ticket costing $500 when most were much lower), whereas `Age` had relatively few outliers.
+
+---
+
+#### Key Statistical Concepts Introduced
+
+**Skewness**
+While analyzing numerical data (via Distplots), you must check if the data is Symmetrical (Normal Distribution) or Skewed.
+*   **Symmetrical:** The curve peaks in the center (bell curve).
+*   **Skewed:** The curve leans to one side.
+    *   **Example:** Salary data is usually skewed (many people earn low amounts, very few earn millions).
+*   **Measurement:** You can use `df['column'].skew()` in Pandas.
+    *   **0:** Perfectly symmetrical.
+    *   **Positive:** Skewed right.
+    *   **Negative:** Skewed left.
+
+**Descriptive Statistics**
+Beyond graphs, you should calculate specific metrics for numerical columns using Pandas functions:
+*   `min()` and `max()` to find the range.
+*   `mean()` to find the average.
+
+#### Summary Table
+
+| Data Type | Primary Question | Recommended Plots |
+| :--- | :--- | :--- |
+| **Categorical** | How frequent is each category? | Countplot, Pie Chart |
+| **Numerical** | What is the distribution and are there outliers? | Histogram, Distplot, Boxplot |
