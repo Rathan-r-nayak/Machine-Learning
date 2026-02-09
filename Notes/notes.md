@@ -907,3 +907,18 @@ Beyond graphs, you should calculate specific metrics for numerical columns using
 | :--- | :--- | :--- |
 | **Categorical** | How frequent is each category? | Countplot, Pie Chart |
 | **Numerical** | What is the distribution and are there outliers? | Histogram, Distplot, Boxplot |
+
+
+
+
+## Gradient Descent
+![alt text](animation.gif)
+![alt text](animation1.gif)
+![alt text](animation2.gif)
+![alt text](animation3.gif)
+![alt text](animation4.gif)
+![alt text](animation5.gif)
+![alt text](animation6.gif)
+![alt text](animation7.gif)
+![alt text](animation8.gif)
+![alt text](animation9.gif)
